@@ -1,0 +1,23 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+.loader {
+  border: 8px solid #f3f3f3; /* 明るい灰色 */
+  border-top: 8px solid #3498db; /* 青色 */
+  border-radius: 50%; /* 丸にする */
+  width: 60px; /* 幅 */
+  height: 60px; /* 高さ */
+  animation: spin 1s linear infinite; /* アニメーション */
+  margin: 100px auto; /* 中央に配置 */
+}
+
+/* スピンアニメーション */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
