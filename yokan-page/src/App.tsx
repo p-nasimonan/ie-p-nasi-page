@@ -21,7 +21,7 @@ const Layout = () => {
             <Link to="/contact">contact</Link>
           </li>
           <li>
-            <Link to="/internal">学内向け</Link>
+            <a href="https://ie.u-ryukyu.ac.jp/~e245719/internal">学内向け</a>
           </li>
         </ul>
       </nav>
@@ -36,15 +36,23 @@ const Home = () => {
   return (
     <div className="page-content">
       <div className="profile">
-        <img src = "./myself.png" alt="自分の写真" />
-        <div className="profile-text">
+        <img src = "/~e245719/myself.png" alt="自分の写真" />
+        <div className="profile-container">
           <h2>名前</h2>
           <p>ネット上の名前: ようかん、P-nasi</p>
         </div>
-        <div className="profile-text">
+        <div className="profile-container">
           <h2>所属</h2>
           <p>琉球大学 工学部 知能情報コース y24</p>
         </div>
+      </div>
+      <div className="introduction">
+        <h2>$ このサイトについて</h2>
+        <p>ようかんのページへようこそ！</p>
+        <p>このページは、琉球大学工学部の学生が趣味で作った自己紹介ページです。</p>
+        <p>このページはReact、viteを使って作成しています。</p>
+        <p>このページは、React Routerを使ってページ遷移をしています。</p>
+        <p>このページは、CSSを使ってデザインしています。</p>
       </div>
     </div>
   );
@@ -68,19 +76,14 @@ const Works = () => {
 const Contact = () => {
   return (
     <div className="page-content">
-      <h1>Contact</h1>
+      <div className="contact">
+        <h2>twitter</h2>
+        <a href="https://x.com/youkan0124"><img src="https://rakugakiicon.com/ri/wp-content/uploads/2015/04/b759b32978d8c1a78eaa4d84db2fc405.png"></img></a>
+      </div>
     </div>
   );
 };
 
-const Internal = () => {
-  return (
-    <div className="page-content">
-      <h1>学内向け情報</h1>
-      {/* 学内向けコンテンツ */}
-    </div>
-  );
-};
 
 function App() {
   useEffect(() => {
@@ -139,7 +142,6 @@ function App() {
             {/* 子ルート */}
             <Route path="works" element={<Works />} />
             <Route path="contact" element={<Contact />} />
-            <Route path="internal" element={<Internal />} />
           </Route>
         </Routes>
       </>
