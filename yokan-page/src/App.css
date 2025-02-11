@@ -1,23 +1,250 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
 
 
-.loader {
-  border: 8px solid #f3f3f3; /* 明るい灰色 */
-  border-top: 8px solid #3498db; /* 青色 */
-  border-radius: 50%; /* 丸にする */
-  width: 60px; /* 幅 */
-  height: 60px; /* 高さ */
-  animation: spin 1s linear infinite; /* アニメーション */
-  margin: 100px auto; /* 中央に配置 */
+
+/* 3D直方体のためのCSS変数 */
+:root {
+  --box-width: 50;  /* 横幅 */
+  --box-height: 30; /* 高さ */
+  --box-depth: 35;  /* 奥行き */
 }
 
-/* スピンアニメーション */
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  font-size: 2rem;
+  background-color: rgb(247, 207, 216);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+}
+
+/* ローディング終了時のスタイル */
+.loading.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#scene {
+  position: relative;
+  perspective: 1000px;
+  width: 100%;  /* 幅を100%に変更 */
+  height: calc(var(--box-height) * 2px);
+  margin: 100px auto;
+  opacity: 1;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  /* 横並び用のスタイル追加 */
+  display: flex;
+  justify-content: center;
+  gap: 50px;  /* 箱の間隔 */
+}
+
+/* ローディング終了時のスタイル */
+#scene.hidden {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.boxBase {
+  position: relative;  /* stickyからrelativeに変更 */
+  margin: 0;
+  /* left と top を削除 */
+  width: calc(var(--box-width) * 2px);  /* 固定幅を設定 */
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: turnAround 10s linear infinite;
+}
+
+/* 直方体の6面のスタイル */
+.boxBase > div {
+  position: absolute;
+  background: rgb(244, 248, 211);
+  box-shadow: 0 4px 20px rgb(166, 241, 224); /* 影を追加 */
+  left: 50%;
+  top: 50%;
+  transform-origin: center;
+}
+
+/* 前面 */
+.front {
+  width: calc(var(--box-width) * 1px);
+  height: calc(var(--box-height) * 1px);
+  transform: translate(-50%, -50%) translateZ(calc(var(--box-depth) * 0.5px));
+}
+
+/* 背面 */
+.back {
+  width: calc(var(--box-width) * 1px);
+  height: calc(var(--box-height) * 1px);
+  transform: translate(-50%, -50%) translateZ(calc(var(--box-depth) * -0.5px)) rotateY(180deg);
+}
+
+/* 上面 */
+.top {
+  width: calc(var(--box-width) * 1px);
+  height: calc(var(--box-depth) * 1px);
+  transform: translate(-50%, -50%) translateY(calc(var(--box-height) * -0.5px)) rotateX(-90deg) rotateY(180deg);
+}
+
+/* 底面 */
+.bottom {
+  width: calc(var(--box-width) * 1px);
+  height: calc(var(--box-depth) * 1px);
+  transform: translate(-50%, -50%) translateY(calc(var(--box-height) * 0.5px)) rotateX(-90deg);
+}
+
+/* 右面 */
+.right {
+  width: calc(var(--box-depth) * 1px);
+  height: calc(var(--box-height) * 1px);
+  transform: translate(-50%, -50%) translateX(calc(var(--box-width) * 0.5px)) rotateY(90deg);
+}
+
+/* 左面 */
+.left {
+  width: calc(var(--box-depth) * 1px);
+  height: calc(var(--box-height) * 1px);
+  transform: translate(-50%, -50%) translateX(calc(var(--box-width) * -0.5px)) rotateY(-90deg);
+}
+
+@keyframes turnAround {
+  0% {
+    transform: rotateX(60deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(60deg) rotateZ(360deg);
+  }
+}
+
+
+
+
+
+/* メインコンテンツのスタイル */
+.main-content {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 1200px; /* 最大幅を広げる */
+  margin: 0 auto;
+  min-height: 100vh; /* 最小高さを画面いっぱいに */
+}
+
+/* 見出しのスタイル */
+.welcome-title {
+  font-size: 2.5rem; /* フォントサイズを大きく */
+  color: #4a4a4a; /* テキストカラーを変更 */
+  text-align: center; /* 中央揃え */
+  margin-bottom: 1.5rem; /* 下のマージンを追加 */
+}
+
+/* ナビゲーションリストのスタイル */
+.navigation-list {
+  list-style-type: none; /* リストのスタイルをなしに */
+  padding: 0; /* パディングをなしに */
+  display: flex; /* フレックスボックスを使用 */
+  justify-content: center; /* 中央揃え */
+  gap: 2rem; /* リストアイテムの間隔 */
+}
+
+.navigation-list li {
+  position: relative; /* 相対位置を設定 */
+}
+
+.navigation-list li a {
+  text-decoration: none; /* 下線をなしに */
+  color: #007bff; /* リンクの色を変更 */
+  font-weight: bold; /* 太字に */
+  transition: color 0.3s; /* ホバー時の色変更にトランジションを追加 */
+  padding: 0.5rem 1rem; /* パディングを追加 */
+  border-radius: 20px; /* 丸い角を追加 */
+}
+
+.navigation-list li a:hover {
+  color: #0056b3; /* ホバー時の色を変更 */
+  background-color: rgba(0, 123, 255, 0.1); /* 背景色を追加 */
+}
+
+/* ページコンテンツのスタイル */
+.page-content {
+  margin-top: 2rem; /* ナビゲーションとの間隔 */
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+
+/* Profile ページのスタイル */
+
+.profile img {
+  width: 200px;
+  height: 200px;
+  border-radius: 40%;
+  margin: 0 auto 1rem;
+  
+}
+
+.profile{
+  display: flex;
+  justify-content: center;
+}
+
+.profile-text {
+  display: block;
+  margin-left: 3rem;
+  font-size: 1.5rem;
+  color: #4a4a4a;
+  text-align: left;
+}
+
+.profile h2 {
+
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.profile p {
+
+  margin-bottom: 1rem;
+}
+
+
+
+/* Works ページのスタイル */
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.work-item {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.work-item:hover {
+  transform: translateY(-5px);
+}
+
+.work-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
