@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link, Outlet } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom'
 import './App.css'
 
 // レイアウトコンポーネント
@@ -36,7 +36,7 @@ const Home = () => {
   return (
     <div className="page-content">
       <div className="profile">
-        <img src = "/myself.png" alt="自分の写真" />
+        <img src = "./myself.png" alt="自分の写真" />
         <div className="profile-text">
           <h2>名前</h2>
           <p>ネット上の名前: ようかん、P-nasi</p>
@@ -100,7 +100,7 @@ function App() {
   }, []);
 
   return (
-    <Router>
+    <BrowserRouter basename="/~e245719">
       <>
         <div className="loading">
           <div id="scene">
@@ -143,7 +143,7 @@ function App() {
           </Route>
         </Routes>
       </>
-    </Router>
+    </BrowserRouter>
   );
 }
 
