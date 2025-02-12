@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom'
 import './App.css'
 
@@ -84,28 +84,29 @@ const Contact = () => {
   );
 };
 
-
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [hideLoading, setHideLoading] = useState(false);
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      const loading = document.querySelector('.loading');
-      const scene = document.querySelector('#scene');
-      
-      if (loading && scene) {
-        // ローディング画面をフェードアウト
-        loading.classList.add('hidden');
-        // シーンをフェードアウト
-        scene.classList.add('hidden');
-      }
+      // まずローディング画面のフェードアウトを開始
+      setHideLoading(true);
+
+      // ローディング画面のフェードアウト完了後にローディングコンポーネントを削除
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 100); // フェードアウトアニメーションの時間と同じ
+
     }, 2000);
 
-    return () => clearTimeout(timer); // クリーンアップ
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <BrowserRouter basename="/~e245719">
-      <>
-        <div className="loading">
+    {isLoading && (
+        <div className={`loading ${hideLoading ? 'hide' : ''}`}>
           <div id="scene">
             <div className="boxBase">
               <div className="top"></div>
@@ -133,18 +134,16 @@ function App() {
             </div>
           </div>
         </div>
-
+    )}
+      <div className={`content-wrapper ${!isLoading ? 'visible' : ''}`}>
         <Routes>
-          {/* Layoutを親ルートとして設定 */}
           <Route path="/" element={<Layout />}>
-            {/* インデックスルート（ホームページ） */}
             <Route index element={<Home />} />
-            {/* 子ルート */}
             <Route path="works" element={<Works />} />
             <Route path="contact" element={<Contact />} />
           </Route>
         </Routes>
-      </>
+      </div>
     </BrowserRouter>
   );
 }
