@@ -352,37 +352,15 @@ section {
   width: 200px;
   height: 200px;
   margin: 0 auto;
-  margin-top: 14%;
+  margin-top: 20%;
   margin-bottom: -20%;
 }
 
 .skills .skills-container img {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  border-radius: 20%;
-  transition: transform 0.3s ease;
+  position: absolute; /* 画像を重ねるために絶対位置を使用 */
+  transition: transform 0.3s ease; /* スムーズな変化を追加 */
 }
 
-.skills .skills-container img:nth-child(2) {
-  transform: rotate(0deg) translate(70px) rotate(0deg);
-}
-
-.skills .skills-container img:nth-child(3) {
-  transform: rotate(72deg) translate(70px) rotate(-72deg);
-}
-
-.skills .skills-container img:nth-child(4) {
-  transform: rotate(144deg) translate(70px) rotate(-144deg);
-}
-
-.skills .skills-container img:nth-child(5) {
-  transform: rotate(216deg) translate(70px) rotate(-216deg);
-}
-
-.skills .skills-container img:nth-child(6) {
-  transform: rotate(288deg) translate(70px) rotate(-288deg);
-}
 
 .skills img {
   width: 50px;
@@ -394,7 +372,7 @@ section {
   text-align: left;
   background-color: #1e1e1e;  /* 背景色をダークグレーに変更 */
   color: #00ff00;  /* テキストカラーを緑に変更 */
-  padding: 1rem;
+  padding: 0.5rem;
   margin: 1rem;
   border-radius: 8px;
   font-family: 'Courier New', Courier, monospace;  /* フォントを等幅フォントに変更 */
@@ -402,13 +380,18 @@ section {
 }
 
 .about-site h2 {
-  font-size: 2rem;
+  font-size: 1rem;
   margin-bottom: 1rem;
 }
 
 .about-site p {
   margin: 2px auto;
   color: #909090;  
+}
+
+.about-site a {
+  color: #00ff00;  /* リンクの色を緑に変更 */
+  text-decoration: underline;  /* 下線を追加 */
 }
 
 
