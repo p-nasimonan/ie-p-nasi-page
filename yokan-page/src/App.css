@@ -420,6 +420,15 @@ section {
   margin-bottom: 1rem;
 }
 
+.work-item p {
+  margin-bottom: 1rem;
+}
+.work-item img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
 
 /* Contact ページのスタイル */
 .contact{

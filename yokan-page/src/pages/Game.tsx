@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './Game.css';
 
 interface Circle {
@@ -11,6 +11,22 @@ const Game = () => {
   const [circles, setCircles] = useState<Circle[]>([]);
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
+
+  // startGame関数をuseCallbackでメモ化
+  const startGame = useCallback(() => {
+    const interval = setInterval(() => {
+      createCircle();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []); // 依存関係がない場合は空配列
+
+  useEffect(() => {
+    if (gameStarted) {
+      const cleanup = startGame();
+      return cleanup;
+    }
+  }, [gameStarted, startGame]); // startGameを依存関係に追加
 
   // 新しい丸を生成
   const createCircle = () => {
@@ -58,23 +74,6 @@ const Game = () => {
       return circle;
     }));
   };
-
-  // ゲーム開始
-  const startGame = () => {
-    setGameStarted(true);
-    setScore(0);
-    setCircles([]);
-    // 定期的に丸を追加
-    const interval = setInterval(createCircle, 2000);
-    return () => clearInterval(interval);
-  };
-
-  useEffect(() => {
-    if (gameStarted) {
-      const cleanup = startGame();
-      return cleanup;
-    }
-  }, [gameStarted]);
 
   return (
     <div 

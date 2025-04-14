@@ -29,7 +29,7 @@ const Home = () => {
           <h2>趣味</h2>
           <article className="hobby-container">
             <h3>プログラミング</h3>
-            <p>React、Vue、Pythonなどを使っています。</p>
+            <p>React、Pythonなどを使っています。</p>
           </article>
           <article className="hobby-container">
             <h3>アニメ</h3>
