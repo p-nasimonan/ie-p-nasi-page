@@ -10,4 +10,4 @@ cd dist
 # パーミッションを変更
 chmod -R 755 *
 
-scp -r * amane:/home/student/e24/e245719/public_html
+scp -pr * amane:/home/student/e24/e245719/public_html
