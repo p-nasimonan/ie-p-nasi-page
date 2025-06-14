@@ -1,6 +1,5 @@
 #!/bin/bash
-#yokan-pageの中で実行
-
+cd yokan-page
 # Viteプロジェクトをビルド
 npm run build
 

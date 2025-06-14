@@ -30,7 +30,7 @@ const Layout = () => {
             <Link to="/game">Game</Link>
           </li>
           <li>
-            <a href="https://ie.u-ryukyu.ac.jp/~e245719/internal">学内向け</a>
+            <a href="https://ie.u-ryukyu.ac.jp/~e245719/hello">hello(課題)</a>
           </li>
         </ul>
       </nav>
